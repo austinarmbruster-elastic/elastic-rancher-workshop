@@ -616,3 +616,9 @@ Let's remove the resources that were built during this lab.
 kubectl delete -f mission.yaml 
 kubectl delete -f monitoring.yaml
 ```
+
+## Additional Topics
+
+* [Kubernetes Monitoring](https://www.elastic.co/observability/kubernetes-monitoring)
+* [Kubernetes Security Posture Management](https://www.elastic.co/guide/en/security/8.6/kspm.html)
+* [Airgapped ECK](https://www.elastic.co/guide/en/cloud-on-k8s/master/k8s-air-gapped.html)
