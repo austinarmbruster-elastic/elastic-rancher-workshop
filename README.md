@@ -409,7 +409,7 @@ spec:
               cpu: 0.5
             limits:
               memory: 2Gi
-  version: 8.5.3
+  version: 8.6.1
 
 ---
 
@@ -419,7 +419,7 @@ metadata:
   name: monitoring
   namespace: monitoring
 spec:
-  version: 8.5.3
+  version: 8.6.1
   http:
     service:
       spec:
