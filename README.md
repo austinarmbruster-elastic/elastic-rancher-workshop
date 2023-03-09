@@ -91,7 +91,7 @@ echo "https://$(hostname).rfed.run:$(kubectl get svc -n elastic-stack es-kb-quic
 Open Kibana on one of the hosts, e.g. https://student$NUMa.rfed.run:$PORT.
 Log into Kibana using `elastic` as the user name and the password that was generated during the installation.
 
-Spend a couple of minutes exploring Kibana, e.g. loading a sample data set.
+Spend a couple of minutes exploring Kibana, e.g. [loading a sample data](assets/LoadingKibanaSampleData.pdf) set.
 
 ### Explore the Custom Resource Definition Outputs
 
@@ -229,7 +229,7 @@ echo "https://$(hostname).rfed.run:$(kubectl get svc -n data-lake data-lake-kb-h
 Open Kibana on one of the hosts, e.g. https://student$NUMa.rfed.run:$PORT.
 Log into Kibana using `elastic` as the user name and the password that was generated during the installation.
 
-Load the Kibana ecommerce sample data.
+[Load the Kibana ecommerce sample data](assets/LoadingKibanaSampleData.pdf).
 
 ### Experimental Cluster
 
@@ -572,7 +572,7 @@ What is the Elastic Stack version for the mission cluster?
 
 ### Load data into the Cluster
 
-Open the mission cluster and load the Kibana sample data.
+Open the mission cluster and [load the Kibana sample data](assets/LoadingKibanaSampleData.pdf).
 
 ```bash
 kubectl get secret -n mission mission-es-elastic-user -o go-template='{{.data.elastic | base64decode}}' ; echo
