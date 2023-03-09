@@ -1,5 +1,15 @@
 # Elastic / Rancher Workshop
 
+Rancher is a fantastic Kubernetes distribution, particularly for air gapped environments!
+Rancher has a [workshop](https://github.com/clemenko/rke_workshop) that they typically use to show how to get going with three virtual machines and be fully operating with a STIG compliante Kubernetes environment.
+This workshop is a companion to that workshop to show how to get Elastic Cloud for Kuberentes running in a Kubernetes environment and then deploy clusters on top of that environment.
+
+The workshop will work through:
+* [Environment Prep - Rancher workshop specific updates](#Environment-prep-work)
+* [Lab 1: Install and First Cluster](#lab-1---eck-install--first-cluster)
+* [Lab 2: Cross Cluster Search](#lab-2---cross-cluster-search)
+* [Lab 3: Stack Monitoring & Upgrades](#lab-3---stack-monitoring--upgrades)
+
 ## Environment prep work
 
 Let's create a directory to put files that we will need during the lab.
@@ -74,7 +84,6 @@ es-kb-quickstart-eck-kibana-kb-http   NodePort   10.43.51.207   <none>        56
 
 We can further simplify this process by having the shell just produce the URL.
 
-#### TODO: confirm the command works
 ```bash
 echo "https://$(hostname).rfed.run:$(kubectl get svc -n elastic-stack es-kb-quickstart-eck-kibana-kb-http -o jsonpath='{.spec.ports[].nodePort}')"
 ```
@@ -104,7 +113,7 @@ kubectl get kb -A
 
 ### Outcome
 
-With a few commands, we were able to deploy an SRE (Sire Reliability Engineer) in a box to monitor our Elastic Stack.
+With a few commands, we were able to deploy an SRE (Site Reliability Engineer) in a box to monitor our Elastic Stack.
 In another command, we were able to deploy Elasticsearch and Kibana in a simple, development configuration.
 The full Elastic Stack was secured from the start.
 Finally, we were able to run some status commands to get insight into the cluster health right from the kubernetes command line.
@@ -211,21 +220,8 @@ First get the `elastic` user password.
 kubectl get secret -n data-lake data-lake-es-elastic-user -o go-template='{{.data.elastic | base64decode}}' ; echo
 ```
 
-Now get the port where Kibana is being served up:
+Now get the URL where Kibana is being served up:
 
-```bash
-kubectl get svc -n data-lake data-lake-kb-http
-```
-
-The above will emit an answer like the following.
-In this example, Kibana is being served up on port 30943 on all hosts.
-
-```bash
-NAME                TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
-data-lake-kb-http   NodePort   10.43.126.34   <none>        5601:30943/TCP   75m
-```
-
-#### TODO: confirm the command works
 ```bash
 echo "https://$(hostname).rfed.run:$(kubectl get svc -n data-lake data-lake-kb-http -o jsonpath='{.spec.ports[].nodePort}')"
 ```
@@ -331,20 +327,8 @@ First get the `elastic` user password.
 kubectl get secret -n experimental experimental-es-elastic-user -o go-template='{{.data.elastic | base64decode}}' ; echo
 ```
 
-Now get the port where Kibana is being served up:
+Now get the URL where Kibana is being served up:
 
-```bash
-kubectl get svc -n experimental experimental-kb-http
-```
-
-The above will emit an answer like the following.
-In this example, Kibana is being served up on port 30944 on all hosts.
-
-```bash
-NAME                TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
-experimental-kb-http   NodePort   10.43.126.34   <none>        5601:30944/TCP   75m
-```
-#### TODO: confirm the command works
 ```bash
 echo "https://$(hostname).rfed.run:$(kubectl get svc -n experimental experimental-kb-http -o jsonpath='{.spec.ports[].nodePort}')"
 ```
